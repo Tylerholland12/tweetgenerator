@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+
+  <link href="static/styles.css" rel="stylesheet">
+</head>
+
+<body>
+ 
+          
+  </div>
+  <div class="content">
+    <div class="hero">
+      <h1 class="title">Tweet Generator</h1>
+      <h1 class="title shift clip">
+        <span class="word-shift">
+          <b class="is-visible">{{sentence}}&nbsp;</b>
+          <b>{{sentence2}}</b>
+          <b>{{sentence3}}</b>
+          <b>{{sentence4}}</b>
+          <b>{{sentence5}}</b>
+        </span>
+      </h1>
+      <div>
+        <button class="button modal-toggle">new tweets</button>
+
+      </div>
+
+    </div>
+ 
+    </section>
+
+  </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="static/scripts.min.js"></script>
+  <script>
+    // Close modal on escape key
+    $(document).keyup(function (e) {
+      if (e.key === "Escape") {
+        $('.modal').removeClass('modal-show');
+        $('.content').removeClass('content-blurred');
+        $('body').removeClass('no-scroll');
+      }
+    });
+
+    $(function () {
+
+      // Provider card slider
+      $('.slider').flickity({
+        pauseAutoPlayOnHover: false,
+        prevNextButtons: false,
+        cellAlign: 'center',
+        draggable: false,
+        freeScroll: false,
+        wrapAround: true,
+        pageDots: false,
+        autoPlay: 3000,
+      });
+
+      // Imbox zero slider
+      $('.zero-slider').flickity({
+        pauseAutoPlayOnHover: false,
+        prevNextButtons: false,
+        cellAlign: 'center',
+        freeScroll: false,
+        wrapAround: false,
+        draggable: false,
+        pageDots: false,
+        autoPlay: 3000,
+        fade: true,
+      });
+
+      // Open & close modal
+      $('.modal-toggle').click(function () {
+        $('.modal').toggleClass('modal-show');
+        $('.content').toggleClass('content-blurred');
+        $('body').toggleClass('no-scroll');
+      });
+
+      // // Reserve username form
+      $(".form").submit(function (e) {
+        e.preventDefault();
+        var $form = $(this);
+        $.post($form.attr("action"), $form.serialize()).then(function () {
+          $('.form-content').addClass('form-content-hide');
+          $('.success').addClass('success-show');
+        });
+      });
+
+      // Save user's first name
+      $(".form").submit(function (e) {
+        e.preventDefault();
+        var value = $("#firstName").val();
+        $('.first-name').text("Welcome," + " " + value + "!");
+      });
+
+      // Feather icons
+      feather.replace()
+
+      // ScrollReveal
+      ScrollReveal().reveal('.hero, .title, .screen, .features, .cards, .zero-slider', {
+        distance: '40px',
+        duration: 2000,
+        mobile: false,
+        reset: false,
+        opacity: 0
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>
